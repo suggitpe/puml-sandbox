@@ -1,0 +1,33 @@
+@startuml
+!include <C4/C4_Container>
+
+'ref http://plantuml.com/stdlib
+!include <office/Users/user.puml>
+!include <office/Users/mobile_user.puml>
+
+title System Landscape diagram for larger organisation
+
+Person(CUST, "Personal Banking Customer", "A Customer of the bank with personal bank accounts")
+Enterprise_Boundary(c0, "Big Bank"){
+    Person_Ext(CS, "Customer Service", "Customer service staff")
+    Person_Ext(BO, "Back Office Staff", "Administrative staff")
+    System(IBS, "Internet Banking System", "Allows customers to ...")
+    System_Ext(ATM, "ATM", "Allows customers to withdraw cash.")
+    System_Ext(EMAIL, "E-Mail System", "The internal MS-Exchange system")
+    System_Ext(MF, "Mainframe", "Core banking / Pos keeping solution")
+}
+
+Rel(CUST, IBS, "uses")
+Rel_R(CUST, ATM, "uses")
+Rel(IBS, EMAIL, "sends email using")
+Rel(EMAIL, CUST, "sends emails to")
+Rel_R(IBS, MF, "uses")
+Rel_D(ATM, MF, "uses")
+Rel_R(CUST, CS, "Asks questions to", "Telephone")
+Rel_D(CS, MF, "uses")
+Rel_U(BO, MF, "uses")
+
+Lay_R(ATM, CS)
+
+
+@enduml
