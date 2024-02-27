@@ -1,0 +1,21 @@
+@startuml
+!include <C4/C4_Container>
+
+'ref http://plantuml.com/stdlib
+!include <office/Users/user.puml>
+!include <office/Users/mobile_user.puml>
+
+title System Context of simple internet banking
+
+Person(CUST, "Personal Banking Customer", "A Customer of the bank with personal bank accounts")
+Container(IBS, "Internet Banking System", "Allows customers to view information about their bank accounts, and make payments")
+System_Ext(MF, "Mainframe Banking System", "Stores all the core banking information about customers, accounts, transactions, etc")
+System_Ext(EMAIL, "EMail System", "The internal MS Exchange e-mail system")
+
+Rel(CUST, IBS, "Views account balances, and makes payments using")
+Rel(IBS, MF, "Gets account information from, and makes payments using")
+Rel_Neighbor(IBS, EMAIL, "Sends e-mails", "SMTP")
+Rel_Back(CUST, EMAIL, "Sends emails to")
+
+@enduml
+
