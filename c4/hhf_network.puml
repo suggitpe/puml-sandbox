@@ -1,0 +1,63 @@
+@startuml
+!define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
+!include osaPuml/Common.puml
+!include osaPuml/User/all.puml
+!include osaPuml/Hardware/all.puml
+!include osaPuml/Misc/all.puml
+!include osaPuml/Server/all.puml
+!include osaPuml/Site/all.puml
+
+' Users
+together {
+    osa_user_green(MUM, "Mal", "Floundering", "")
+    osa_user_green(DAD, "David", "Chairman", "")
+    osa_user_green(TV, "TVs", "Anyone watching a TV")
+    note left: Amazon FireSticks
+}
+
+' Devices
+together {
+    osa_desktop(mal1, "192.168.2.xx", "Windows 10", "Mal 1")
+    osa_desktop(david1, "192.168.2.xx", "Windows 11", "David 1")
+    osa_iPhone(dad_phone, "Dynamic IP", "Android 11", "Phone")
+    osa_iPhone(mum_phone, "Dynamic IP", "Android 10", "Phone")
+    osa_device_usb_wifi(FIRETV, "Smart TVs", "Amazon Fire TV")
+}
+
+MUM --> mal1: solitare
+MUM --> mum_phone: whatsapp
+DAD --> david1: stamps
+DAD --> dad_phone: technical support
+TV --> FIRETV: WIFI
+
+
+' Network
+
+osa_device_wireless_router(edge, "192.168.2.1", "Edge Router")
+note right: admin/alwyn
+osa_device_wireless_router(modem, "192.168.1.1", "5G Router")
+note left: admin/alwyn
+osa_device_wireless_router(deco, "192.168.68.1", "Deco Wifi")
+note left: admin/alwyn\nknockknock
+osa_server_database(NAS, "192.168.2.xxx", "NAS Drive")
+osa_printer(XEROX, "192.168.2.xxx", "Xerox Printer")
+osa_cloud(cloud, "Internet", "Network")
+osa_wireless_network(aerial, "Extermal antenna", "5G reception")
+
+david1 --> edge: wired
+mal1 --> edge: wired
+
+dad_phone --> deco: WIFI
+mum_phone --> deco: WIFI
+FIRETV --> deco: WIFI
+
+NAS --> edge: wired
+XEROX --> edge: wired
+deco --> modem: wired
+edge --> modem: wired
+
+modem --> aerial
+
+aerial --> cloud
+
+@enduml
