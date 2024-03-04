@@ -1,0 +1,37 @@
+@startuml
+'!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+!include <c4/C4_Container.puml>
+
+'ref http://plantuml.com/stdlib
+
+LAYOUT_WITH_LEGEND()
+
+title Container diagram for Internet Banking example
+
+Person(CUST, "Personal Banking Customer", "A Customer of the bank with personal bank accounts")
+
+System_Boundary(c1, "Internet Banking"){
+    Container(web_app, "Web Application", "Java, Spring MVC", "Delivers static content and SPA")
+    Container(spa, "Single Page App", "JavaScript, Angular", "Provides the internet banking functions to the customer")
+    Container(mobile_app, "Mobile App", "C#, Xamarin", "Provides a limited set of functions to the customer through their mobile phone")
+    ContainerDb(database, "Database", "SQL Database", "Stores registration information, auth, etc")
+    Container(backend_api, "API Application", "Java, Docker", "Provides internet banking functions through API")
+}
+
+System_Ext(email_system, "E-Mail System", "The internal Microsoft Exchange system")
+System_Ext(banking_system, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.")
+
+Rel(CUST, web_app, "Uses", "HTTPS")
+Rel(CUST, spa, "Uses", "HTTPS")
+Rel(CUST, mobile_app, "Uses")
+
+Rel_Neighbor(web_app, spa, "Delivers")
+Rel(spa, backend_api, "Uses", "asynch, JSON/HTTPS")
+Rel(mobile_app, backend_api, "Uses", "asynch, JSON/HTTPS")
+Rel_Back_Neighbor( database,backend_api, "Reads and writes to")
+
+Rel_Back(CUST, email_system, "sends emails to ")
+Rel_Back(email_system, backend_api, "sends emails using", "synch, SMTP")
+Rel_Neighbor(backend_api, banking_system, "Uses", "XML/HTTPS")
+
+@enduml
