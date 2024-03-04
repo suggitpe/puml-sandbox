@@ -13,15 +13,16 @@ mindmapDiagram {
 </style>
 
 * <b>Why do we</b>\n<b>draw diagrams?</b>
-** To encourage\ncollaboration
-*** To gain alignment
-*** To get buy-in
-** To capture\nideas
-*** To apply\nstucture to ideas
+    * To encourage\ncollaboration
+        * To gain alignment
+        * To get buy-in
+    * To capture\nideas
+        * To apply\nstucture to ideas
 
 left side
-** To work out what\nwe need to build
-** To show\nrelationships
-** To communicate ideas
+    * To work out what\nwe need to build
+    * To show\nrelationships
+    * To communicate ideas
+
 
 @endmindmap
