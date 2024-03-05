@@ -1,0 +1,104 @@
+@startmindmap
+title Thinking about architecture
+
+skinparam shadowing true
+skinparam backgroundColor #EEEBDC
+skinparam ArrowColor black
+skinparam noteBorderColor black
+
+<style>
+mindmapDiagram {
+    LineColor darkred
+}
+</style>
+
+*[#lightblue] <b>Pete Potted History</b>
+    * <b>UBS</b>
+        * Engineer
+            * Many years (C++ / Java)
+            * XP / Lean / Agile
+            * Head of Engineering (Group Ops IT)
+            *[#lightgreen] <&star> CTO for Application Delivery
+                * Group Software\nEngineering Strategy
+        * Architect
+            * FICC Ops Architect
+            * Finance Architect
+    * <b>Deutsche</b>
+        * Domain Architect
+            * Client Technology
+            * Regulatory Technology
+            * Reference Data CDA
+        * F2B Architect
+            * CIB MIFID II
+            *[#lightgreen] <&star> CIB KYC & Client Perimeter
+            * Group BCBS 239
+            *[#lightgreen] <&star> Group Party
+            *[#lightgreen] <&star> F2B Data alignment
+                * Risk / finance
+        * Distinguished Engineer
+            *[#lightgreen] <&star> Engineering\nCareer Development
+                * Promotions
+                * Coaching
+                * Framework
+            * Voice of the Engineer
+            *[#lightgreen] <&star> Developer Experience
+                * Virtual Workstations
+                * Bureaucracy
+                * Linux Desktop
+    * <b>NatWest</b>
+        * Principal Engineer
+            * Formed PE Role
+                * Engineering, Architecture,\nData, Hosting
+                * Tracks with collective\nresponsibility
+                * Using Lean (VSMs)
+                * Establishing arch domains
+            * Network established\nand leveraged
+            * Driving cross group
+                * Client
+                * Hosting
+                * Data
+                * Payments
+                * Engineering
+
+
+*[#lightblue] <b>Why do i think i will</b>\n<b>be good in this role</b>
+left side
+    * Things will\nfind easy
+        * Disrupting the status quo
+        * Networking and\nforming partnerships
+        * Bringing an engineer mindset
+            * Digitise / codify
+            * Reduce bureaucracy
+    * Things that will help me
+        * Many years as an engineer
+        * Many years as an architect
+        * Strong knowledge of banking
+        * Building relationships
+            * Established network
+right side
+    * Things that will\nstretch me
+        * Influencing across ExCo
+            * Competing goals
+        * Into the detail
+            * Need detail
+            * Need to scale
+            * Finding the balance
+        * How to influence\nacross 4000 people
+    *[#lightgreen] Things that need\nto change
+        * Engineering / Architecture Led
+        * Establish group wide architectures
+            * Too much focus on fireside chats
+            * Establish challenge into the process
+            * Focus on front to back designs
+        * Establsh rigour in the arch process
+            * Program Architecture
+            * Strategic assessment
+        * Strengthen up the arch principles
+            * Make them more relevant
+        * Specific problems
+            * Data
+            * Party / Identity
+            * Payments
+            * Core / (Virtual) Accounts
+
+@endmindmap

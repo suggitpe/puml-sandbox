@@ -12,7 +12,7 @@ mindmapDiagram {
 }
 </style>
 
-* <b>Why do we</b>\n<b>draw diagrams?</b>
+*[#lightgreen] <b>Why do we</b>\n<b>draw diagrams?</b>
     * To encourage\ncollaboration
         * To gain alignment
         * To get buy-in
