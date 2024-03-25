@@ -1,0 +1,37 @@
+@startuml
+
+'!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+!include <c4/C4_Component.puml>
+
+
+LAYOUT_WITH_LEGEND()
+
+title Component diagram for Internet Banking - API Application
+
+Container(spa, "Single Page Application", "javascript and angular", "Provides all the internet banking functions to customers via a browser")
+Container(ma, "Mobile Application", "Xamarin", "Provides a limited subset of the internet banking functions to customers through their mobile device")
+ContainerDb(db, "Database", "Relational database schema", "Store registration detail, hashed credentials etc")
+System_Ext(mbs, "MainFrame Banking System", "Stores all the core banking including position keeping function")
+System_Ext(email, "Email System", "The internal Microsoft Exchange system")
+
+Container_Boundary(api, "API Application"){
+    Component(sign, "Sign In Controller", "MVC ReST Controller", "Allows users to sign in")
+    Component(accounts, "Accounts Summary Controller", "MVC ReST Controller", "Provider customer with a summary of thier accounts")
+    Component(sec, "Security Component", "Spring Bean", "Provides functionality regarding signing on e.g. change passwords")
+    Component(mbsf, "Mainframe Banking System Facade", "Spring Bean", "A facade to the mainframe banking functions")
+
+    Rel(sign, sec, "Uses")
+    Rel(accounts, mbsf, "Uses")
+    Rel(sec, db, "Read / Write", "JDBC")
+    Rel(mbsf, mbs, "Uses", "XML/HTTPS")
+}
+
+Rel(spa, sign, "Uses", "JSON/HTTPS")
+Rel(ma, sign, "Uses", "JSON/HTTPS")
+
+Rel(spa, accounts, "Uses", "JSON/HTTPS")
+Rel(ma, accounts, "Uses", "JSON/HTTPS")
+
+Rel(accounts, email, "Sends emails using", "SMTP")
+
+@enduml
