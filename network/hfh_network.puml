@@ -1,0 +1,96 @@
+@startuml
+!define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
+!include osaPuml/Common.puml
+!include osaPuml/User/all.puml
+!include osaPuml/Hardware/all.puml
+!include osaPuml/Misc/all.puml
+!include osaPuml/Server/all.puml
+!include osaPuml/Site/all.puml
+
+title HFM Network Topology
+
+'stuff
+osa_printer(printer, "Printer","172.10.0.200")
+osa_server_database(nas, "NAS", "172.10.0.201")
+osa_media_tape(xbox, "XBox", "172.10.0.122")
+osa_server_database(cloudKey, "CloudKey", "172.10.0.100")
+osa_image_generic(sky1, "SkyQ LR", "172.10.0.210")
+osa_image_generic(sky2, "SkyQ Snug", "172.10.0.211")
+osa_image_generic(sky3, "SkyQ Bed", "172.10.0.210")
+
+'Cameras
+osa_camera_web(drive_cam, "Drive", "172.10.0.72")
+osa_camera_web(gate_cam, "Gate", "172.10.0.71")
+osa_camera_web(lon_gdn_cam, "Long Garden", "172.10.0.73")
+osa_camera_web(back_gdn_cam, "Back Garden", "172.10.0.74")
+
+' Access Points
+osa_wireless_network(hall_ac, "Hall", "172.10.0.101")
+osa_wireless_network(lib_ac, "Library", "172.10.0.103")
+osa_wireless_network(lroom_ac, "Living Room", "172.10.0.102")
+osa_wireless_network(coach_ac, "Coach House", "172.10.0.106")
+osa_wireless_network(gym_ac, "Gym", "172.10.0.105")
+osa_wireless_network(snug_ac, "Snug", "172.10.0.104")
+osa_wireless_network(bed_ac, "Bed", "172.10.0.107")
+
+' Switches
+osa_hub(hall_switch, "Hall", "switch")
+osa_hub(rbry_switch, "RaspberryPi", "switch")
+osa_hub(lroom_switch, "Living Room", "switch")
+osa_hub(lib_switch, "Library", "switch")
+osa_hub(cellar_switch, "Cellar", "switch")
+osa_hub(coach_switch, "Coach House", "switch")
+osa_hub(gym_switch, "Gym", "switch")
+osa_hub(snug_switch, "Snug", "switch")
+osa_hub(bed_switch, "Bedroom", "switch")
+
+' Routers
+osa_device_wireless_router(edge, "172.10.0.1", "Edge Router")
+osa_device_wireless_router(modem, "192.168.0.1", "Sky Hub")
+note left: incl shield
+osa_cloud(cloud, "Internet", "Network")
+
+' ##############################################
+
+Many_Pis --> rbry_switch
+
+sky1 --> lroom_switch
+sky2 --> snug_switch
+sky3 --> bed_switch
+printer -> lib_switch
+nas --> hall_switch
+xbox ..> snug_switch
+cloudKey --> hall_switch
+
+drive_cam --> gym_switch
+gate_cam --> lib_switch
+lon_gdn_cam --> lroom_switch
+back_gdn_cam --> lroom_switch
+
+gym_switch --> coach_switch
+coach_switch --> cellar_switch
+cellar_switch --> hall_switch
+snug_switch --> lroom_switch
+bed_switch --> lroom_switch
+
+gym_ac --> gym_switch
+coach_ac --> coach_switch
+hall_ac --> hall_switch
+lroom_ac --> lroom_switch
+lib_ac --> lib_switch
+snug_ac --> snug_switch
+bed_ac ..> bed_switch: mesh
+
+
+hall_switch --> edge: wired
+lroom_switch --> edge: wired
+lib_switch --> edge: wired
+rbry_switch --> edge: wired
+
+edge --> modem: wired
+
+modem --> cloud: copper
+
+footer %filename() rendered with PlantUML version %version()
+
+@enduml
