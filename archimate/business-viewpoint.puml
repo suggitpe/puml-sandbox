@@ -1,0 +1,86 @@
+@startuml
+skinparam rectangle<<behavior>> {
+	roundCorner 25
+}
+sprite $bProcess jar:archimate/business-process
+sprite $bActor jar:archimate/business-actor
+sprite $bActivity jar:archimate/business-activity
+sprite $aService jar:archimate/application-service
+sprite $aComponent jar:archimate/application-component
+
+header
+Currently under review
+endheader
+
+title Business Viewpoint For Lending Flow
+
+rectangle "Customer"  as C <<$bActor>><<behavior>> #Business
+rectangle "Relationship Manager"  as RM <<$bActor>><<behavior>> #Business
+rectangle "Credit Officer"  as CO <<$bActor>><<behavior>> #Business
+
+rectangle "Complete Documentation"  as CDoc <<$bActivity>><<behavior>> #Business
+rectangle "Some kind of handshake\nwith the customer"  as HS <<$bActivity>><<behavior>> #Business
+
+rectangle "2.1 Credit Decision"  as CD <<$bActivity>><<behavior>> #Business
+rectangle "3.1 Gather Customer Data"  as GCD <<$bProcess>><<behavior>> #Business
+rectangle "3.2 Enablement"  as E <<$bProcess>><<behavior>> #Business
+rectangle "3.3 Draft Documentation"  as DD <<$bProcess>><<behavior>> #Business
+rectangle "3.4 Perform Fraud Checks"  as FC <<$bProcess>><<behavior>> #Business
+rectangle "3.5 Fulfillment"  as FF <<$bProcess>><<behavior>> #Business
+
+C -down-> RM: Agrees loan shape
+RM -down-> GCD: To cust svcs team
+CO -down-> CD
+E -up-> CD
+GCD -right-> E
+E -right-> DD
+
+C -right-> CDoc: signs
+DD -up-> CDoc: send to customer
+
+CDoc -down-> FC: signed
+FC -right-> FF
+CDoc .right. HS
+DD .right. FC
+
+FF -up-> HS : close the deal
+
+rectangle "CRM\n<D365>" as CRM <<$aComponent>> #Application
+rectangle "Other Customer\nData SoR" as OCD <<$aComponent>> #Application
+rectangle "Credit System" as CS <<$aComponent>> #Application
+rectangle "Document Repository" as DS <<$aComponent>> #Application
+rectangle "Fraud Checking System" as FCS <<$aComponent>> #Application
+rectangle "Position Keeping System" as PK <<$aComponent>> #Application
+
+rectangle "Name List Screening" as NL <<$aService>> #Application
+rectangle "Sanctions Checks" as SANC <<$aService>> #Application
+
+GCD .down.|> CRM: Opinion
+GCD .down.|> OCD: Customer\nData
+GCD .down.|> CS: Customer\nCredit Data
+E .down.|> CS: Decision
+DD .down.|> DS: Store
+FC .down.|> FCS
+FF .down.|> PK: create account
+FF .down.|> CRM
+
+FCS .down.> NL
+FCS .down.> SANC
+
+
+legend right
+Key
+====
+Business Layer
+<$bActor> : Actor
+<$bActivity> : Activity
+<$bProcess> : Process
+----
+Technology Layer
+<$aService> : Service
+<$aComponent> : Component
+endlegend
+
+center footer Example business viewpoint
+
+@enduml

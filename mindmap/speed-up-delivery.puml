@@ -1,0 +1,34 @@
+zoom@startmindmap
+title Mindmap Example
+
+skinparam shadowing true
+skinparam backgroundColor #EEEBDC
+skinparam ArrowColor black
+skinparam noteBorderColor black
+
+<style>
+mindmapDiagram {
+    LineColor darkred
+}
+</style>
+
+*[#lightgreen] <b>Speed up delivery</b>
+    * Reduce time in UAT
+        *[#pink] Reduce number of issues in UAT
+            * Built wrong thing
+                * Adopt specification by example technique
+                * Capture requirements as tests
+            * Built the thing wrong
+                * Do integration testing early
+                * Run automated regression
+                * Adopt user acceptance test
+
+    * Reduce time in SIT
+        *[#pink] Reduce numbers of bugs in SIT
+            * Adopt focus on unit testing
+            * Better training on OO and abstractions
+    * Regression testing
+    * Governance
+
+
+@endmindmap
