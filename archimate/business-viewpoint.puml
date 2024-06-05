@@ -60,7 +60,7 @@ GCD .down.|> OCD: Customer\nData
 GCD .down.|> CS: Customer\nCredit Data
 E .down.|> CS: Decision
 DD .down.|> DS: Store
-FC .down.|> FCS
+FC -down-> FCS: check
 FF .down.|> PK: create account
 FF .down.|> CRM
 
@@ -68,7 +68,7 @@ FCS .down.> NL
 FCS .down.> SANC
 
 
-legend right
+legend left
 Key
 ====
 Business Layer
