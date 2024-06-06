@@ -30,5 +30,18 @@ mindmapDiagram {
     * Regression testing
     * Governance
 
+legend left
+Key
+====
+Business Layer
+<$bActor> : Actor
+<$bActivity> : Activity
+<$bProcess> : Process
+----
+Technology Layer
+<$aService> : Service
+<$aComponent> : Component
+endlegend
+
 
 @endmindmap
