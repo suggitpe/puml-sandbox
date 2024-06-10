@@ -1,5 +1,7 @@
 @startuml
 
+!include <archimate/Archimate>
+
 skinparam shadowing true
 skinparam backgroundColor #EEEBDC
 skinparam ArrowColor black
@@ -8,6 +10,7 @@ skinparam noteBorderColor black
 skinparam rectangle<<behavior>> {
 	roundCorner 25
 }
+
 sprite $bProcess jar:archimate/business-process
 sprite $bActor jar:archimate/business-actor
 sprite $bActivity jar:archimate/business-activity
@@ -30,7 +33,7 @@ rectangle "Some kind of handshake\nwith the customer"  as HS <<$bActivity>><<beh
 rectangle "2.1 Credit Decision"  as CD <<$bActivity>><<behavior>> #Business
 rectangle "3.1 Gather Customer Data"  as GCD <<$bProcess>><<behavior>> #Business
 rectangle "3.2 Enablement"  as E <<$bProcess>><<behavior>> #Business
-note left: 1
+'note left: 1
 rectangle "3.3 Draft Documentation"  as DD <<$bProcess>><<behavior>> #Business
 rectangle "3.4 Perform Fraud Checks"  as FC <<$bProcess>><<behavior>> #Business
 rectangle "3.5 Fulfillment"  as FF <<$bProcess>><<behavior>> #Business
@@ -57,11 +60,13 @@ rectangle "CRM\n<D365>" as CRM <<$aComponent>> #Application
 rectangle "Other Customer\nData SoR" as OCD <<$aComponent>> #Application
 rectangle "Credit System" as CS <<$aComponent>> #Application
 rectangle "Document Repository" as DS <<$aComponent>> #Application
-rectangle "Fraud Checking System" as FCS <<$aComponent>> #Application
+rectangle "Fraud Checking System" as FCS <<$aComponent>> #Application{
+    rectangle "Name List Screening" as NL <<$aService>> #Application
+    rectangle "Sanctions Checks" as SANC <<$aService>> #Application
+}
 rectangle "Position Keeping System" as PK <<$aComponent>> #Application
 
-rectangle "Name List Screening" as NL <<$aService>> #Application
-rectangle "Sanctions Checks" as SANC <<$aService>> #Application
+
 
 GCD .d..|> CRM: Opinion
 GCD .d.|> OCD: Customer\nData
@@ -71,10 +76,6 @@ DD .d.|> DS: Store
 FC -d-> FCS: check
 FF .d.|> PK: create account
 FF .d..|> CRM
-
-FCS .d.> NL
-FCS .d.> SANC
-
 
 legend left
 Key

@@ -1,0 +1,57 @@
+@startuml
+
+!include <archimate/Archimate>
+
+skinparam shadowing true
+skinparam backgroundColor #EEEBDC
+skinparam ArrowColor black
+skinparam noteBorderColor black
+skinparam rectangle<<behavior>> {
+	roundCorner 25
+}
+
+sprite $bProcess jar:archimate/business-process
+sprite $bActor jar:archimate/business-actor
+sprite $bActivity jar:archimate/business-activity
+sprite $aService jar:archimate/application-service
+sprite $aComponent jar:archimate/application-component
+sprite $aCollaboration jar:archimate/application-collaboration
+
+header
+Currently under review
+endheader
+
+title Application Viewpoint For Lending Flow
+
+'==============================================
+
+Business_Process(GCD, "3.1 Gather Customer Data")
+rectangle "CRM\n<D365>" as CRM <<$aComponent>> #Application
+
+Group(LDN, "Lending"){
+    rectangle "BizBank Lending" as BBL <<$aCollaboration>> #Application{
+        Application_Service(CJ, "Customer Journey")
+        Application_Service(RMJ, "Relationship Manager Journey")
+    }
+}
+
+GCD .d.> CRM
+CRM -d-> LDN
+CJ -[hidden]- RMJ
+
+legend left
+Key
+====
+Business Layer
+<$bActor> : Actor
+<$bActivity> : Activity
+<$bProcess> : Process
+----
+Technology Layer
+<$aService> : Service
+<$aComponent> : Component
+endlegend
+
+center footer Example business viewpoint
+
+@enduml
